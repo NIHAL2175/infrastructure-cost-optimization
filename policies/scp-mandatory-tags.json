@@ -1,0 +1,90 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyEC2CreationWithoutMandatoryTags",
+      "Effect": "Deny",
+      "Action": [
+        "ec2:RunInstances"
+      ],
+      "Resource": [
+        "arn:aws:ec2:*:*:instance/*",
+        "arn:aws:ec2:*:*:volume/*"
+      ],
+      "Condition": {
+        "Null": {
+          "aws:RequestTag/business_unit": "true",
+          "aws:RequestTag/environment": "true",
+          "aws:RequestTag/cost_centre": "true",
+          "aws:RequestTag/team": "true",
+          "aws:RequestTag/service": "true",
+          "aws:RequestTag/created_by": "true"
+        }
+      }
+    },
+    {
+      "Sid": "DenyRDSCreationWithoutMandatoryTags",
+      "Effect": "Deny",
+      "Action": [
+        "rds:CreateDBInstance",
+        "rds:CreateDBCluster"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "Null": {
+          "aws:RequestTag/business_unit": "true",
+          "aws:RequestTag/environment": "true",
+          "aws:RequestTag/cost_centre": "true",
+          "aws:RequestTag/team": "true",
+          "aws:RequestTag/service": "true"
+        }
+      }
+    },
+    {
+      "Sid": "DenyS3BucketCreationWithoutMandatoryTags",
+      "Effect": "Deny",
+      "Action": [
+        "s3:CreateBucket"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "Null": {
+          "aws:RequestTag/business_unit": "true",
+          "aws:RequestTag/environment": "true",
+          "aws:RequestTag/cost_centre": "true",
+          "aws:RequestTag/team": "true"
+        }
+      }
+    },
+    {
+      "Sid": "DenyModifyingOrDeletingGovernanceTags",
+      "Effect": "Deny",
+      "Action": [
+        "ec2:DeleteTags",
+        "rds:RemoveTagsFromResource",
+        "s3:DeleteBucketTagging"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "Null": {
+          "aws:TagKeys": "false"
+        },
+        "ForAnyValue:StringEquals": {
+          "aws:TagKeys": [
+            "business_unit",
+            "environment",
+            "cost_centre",
+            "compliance_scope"
+          ]
+        },
+        "StringNotLike": {
+          "aws:PrincipalArn": [
+            "arn:aws:iam::*:role/aws-service-role/*",
+            "arn:aws:iam::*:role/LendFlowFinOpsAdminRole",
+            "arn:aws:iam::*:role/TerraformExecutionRole"
+          ]
+        }
+      }
+    }
+  ]
+}

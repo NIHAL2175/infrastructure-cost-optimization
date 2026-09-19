@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LendFlow Technologies — Service & Squad FinOps Dashboard</title>
+  <style>
+    :root {
+      --bg-primary: #090D16;
+      --bg-surface: #131B2E;
+      --bg-card: rgba(19, 27, 46, 0.8);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-primary: #F1F5F9;
+      --text-secondary: #94A3B8;
+      --accent-purple: #A855F7;
+      --accent-cyan: #06B6D4;
+      --accent-green: #10B981;
+      --accent-red: #EF4444;
+      --accent-amber: #F59E0B;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      padding: 24px;
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 24px;
+    }
+
+    .brand-title {
+      font-size: 22px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .badge-service {
+      background: rgba(168, 85, 247, 0.15);
+      color: var(--accent-purple);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 16px 20px;
+    }
+
+    .card-label { font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 6px; }
+    .card-val { font-size: 24px; font-weight: 700; }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .panel-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    th { text-align: left; padding: 8px 10px; color: var(--text-secondary); border-bottom: 1px solid var(--border-color); }
+    td { padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+    .badge-status {
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 600;
+    }
+    .status-ok { background: rgba(16,185,129,0.15); color: var(--accent-green); }
+    .status-warn { background: rgba(245,158,11,0.15); color: var(--accent-amber); }
+    .status-alert { background: rgba(239,68,68,0.15); color: var(--accent-red); }
+
+    .feed-item {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .feed-item:last-child { border-bottom: none; }
+
+    .footer {
+      background: rgba(19, 27, 46, 0.4);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .footer strong { color: var(--text-primary); display: block; margin-bottom: 4px; }
+  </style>
+</head>
+<body>
+
+  <header class="dashboard-header">
+    <div>
+      <div class="brand-title">
+        <span>Loan Application Service</span>
+        <span class="badge-service">SQUAD SERVICE LEVEL VIEW</span>
+      </div>
+      <p style="color: var(--text-secondary); font-size: 13px; margin-top: 4px;">
+        Owner: <strong>Lending Core Squad</strong> | Service ID: <code>loan-app-api</code> | Product: <code>personal-loan</code>
+      </p>
+    </div>
+    <div style="text-align: right; font-size: 12px; color: var(--text-secondary);">
+      Sprint: <strong>Sprint 42</strong> | Active Version: <strong>v2.8.4 (Deploy: 4h ago)</strong>
+    </div>
+  </header>
+
+  <!-- Service KPI Cards -->
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-label">Daily Service Run-Rate</div>
+      <div class="card-val" style="color: var(--accent-cyan);">$548.20 / day</div>
+      <div style="font-size: 12px; color: var(--accent-green); margin-top: 4px;">▼ -32% post-c5.2xlarge downsizing</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Unit Cost per API Call</div>
+      <div class="card-val">$0.00042</div>
+      <div style="font-size: 12px; color: var(--accent-green); margin-top: 4px;">1,305,000 requests processed today</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Last Deploy Cost Delta</div>
+      <div class="card-val" style="color: var(--accent-green);">-$18.40 / day</div>
+      <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Commit <code>#e2c03f0</code> (S3 VPC Endpoint route)</div>
+    </div>
+  </div>
+
+  <div class="main-grid">
+    <!-- Active Fleet Status & Pods -->
+    <div class="panel">
+      <div class="panel-title">
+        <span>Active Instance Fleet & Scaling Telemetry</span>
+        <span style="font-size: 11px; color: var(--accent-cyan);">ASG: asg-prod-loan-api</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Node ID</th>
+            <th>Zone</th>
+            <th>Type</th>
+            <th>CPU Avg</th>
+            <th>RAM Avg</th>
+            <th>Cost / Hr</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>i-0a112233aa01</code></td>
+            <td>ap-south-1a</td>
+            <td>c5.2xlarge</td>
+            <td>58.4%</td>
+            <td>62.1%</td>
+            <td>$0.340</td>
+            <td><span class="badge-status status-ok">OPTIMAL</span></td>
+          </tr>
+          <tr>
+            <td><code>i-0a112233aa02</code></td>
+            <td>ap-south-1b</td>
+            <td>c5.2xlarge</td>
+            <td>61.2%</td>
+            <td>64.0%</td>
+            <td>$0.340</td>
+            <td><span class="badge-status status-ok">OPTIMAL</span></td>
+          </tr>
+          <tr>
+            <td><code>i-0a112233aa03</code></td>
+            <td>ap-south-1c</td>
+            <td>c5.2xlarge</td>
+            <td>56.8%</td>
+            <td>60.5%</td>
+            <td>$0.340</td>
+            <td><span class="badge-status status-ok">OPTIMAL</span></td>
+          </tr>
+          <tr>
+            <td><code>i-0a112233aa04</code></td>
+            <td>ap-south-1a</td>
+            <td>c5.2xlarge</td>
+            <td>59.1%</td>
+            <td>63.2%</td>
+            <td>$0.340</td>
+            <td><span class="badge-status status-ok">OPTIMAL</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Real-Time Activity Feed -->
+    <div class="panel">
+      <div class="panel-title">
+        <span>Recent FinOps Events & Scaling</span>
+        <span style="font-size: 11px; color: var(--text-secondary);">Live Stream</span>
+      </div>
+      <div class="feed-item">
+        <div>
+          <div style="font-weight: 600;">Scale-In Action: 1 Node Removed</div>
+          <div style="color: var(--text-secondary); font-size: 11px;">Traffic dropped below 35% CPU threshold</div>
+        </div>
+        <span style="color: var(--accent-green); font-size: 11px;">18m ago</span>
+      </div>
+      <div class="feed-item">
+        <div>
+          <div style="font-weight: 600;">S3 VPC Endpoint Active</div>
+          <div style="color: var(--text-secondary); font-size: 11px;">NAT Gateway processing dropped to 0 GB</div>
+        </div>
+        <span style="color: var(--accent-cyan); font-size: 11px;">4h ago</span>
+      </div>
+      <div class="feed-item">
+        <div>
+          <div style="font-weight: 600;">Scheduled Dev Scale-Down</div>
+          <div style="color: var(--text-secondary); font-size: 11px;">dev-loan-api scaled to 0 at 19:00 IST</div>
+        </div>
+        <span style="color: var(--text-secondary); font-size: 11px;">Yesterday</span>
+      </div>
+      <div class="feed-item">
+        <div>
+          <div style="font-weight: 600;">Tag SCP Validation Passed</div>
+          <div style="color: var(--text-secondary); font-size: 11px;">PR #142 verified by Infracost</div>
+        </div>
+        <span style="color: var(--accent-green); font-size: 11px;">2d ago</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Meta -->
+  <footer class="footer">
+    <div>
+      <strong>Data Sources</strong>
+      Application Performance Monitoring (APM), CloudWatch Logs, Infracost CI/CD Webhook.
+    </div>
+    <div>
+      <strong>Refresh Frequency</strong>
+      Every 5 Minutes (Real-time microservice observability).
+    </div>
+    <div>
+      <strong>RBAC Permissions</strong>
+      Role: <code>FinOpsDeveloperAccess</code> (All engineering squad members).
+    </div>
+    <div>
+      <strong>Actionable Developer Insight</strong>
+      Last deploy reduced network egress costs by $18.40/day without any change in endpoint response latency.
+    </div>
+  </footer>
+
+</body>
+</html>

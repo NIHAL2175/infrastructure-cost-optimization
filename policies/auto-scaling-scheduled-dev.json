@@ -1,0 +1,44 @@
+{
+  "ScheduledActions": [
+    {
+      "ScheduledActionName": "dev-fleet-morning-scale-up",
+      "AutoScalingGroupName": "asg-lendflow-dev-shared-fleet",
+      "Recurrence": "30 3 * * 1-5",
+      "DesiredCapacity": 1,
+      "MinSize": 1,
+      "MaxSize": 4,
+      "TimeZone": "Asia/Kolkata",
+      "Description": "Scale up development instances at 09:00 AM IST on weekdays for active engineering"
+    },
+    {
+      "ScheduledActionName": "dev-fleet-evening-scale-down",
+      "AutoScalingGroupName": "asg-lendflow-dev-shared-fleet",
+      "Recurrence": "30 13 * * 1-5",
+      "DesiredCapacity": 0,
+      "MinSize": 0,
+      "MaxSize": 0,
+      "TimeZone": "Asia/Kolkata",
+      "Description": "Scale down development instances to zero at 07:00 PM IST on weekdays to capture 69.4% idle waste"
+    },
+    {
+      "ScheduledActionName": "staging-fleet-morning-scale-up",
+      "AutoScalingGroupName": "asg-lendflow-staging-shared-fleet",
+      "Recurrence": "30 3 * * 1-5",
+      "DesiredCapacity": 1,
+      "MinSize": 1,
+      "MaxSize": 6,
+      "TimeZone": "Asia/Kolkata",
+      "Description": "Scale up staging test environment at 09:00 AM IST on weekdays"
+    },
+    {
+      "ScheduledActionName": "staging-fleet-evening-scale-down",
+      "AutoScalingGroupName": "asg-lendflow-staging-shared-fleet",
+      "Recurrence": "30 13 * * 1-5",
+      "DesiredCapacity": 0,
+      "MinSize": 0,
+      "MaxSize": 0,
+      "TimeZone": "Asia/Kolkata",
+      "Description": "Scale down staging environment to zero at 07:00 PM IST on weekdays"
+    }
+  ]
+}

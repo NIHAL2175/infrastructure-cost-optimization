@@ -1,0 +1,18 @@
+resource_id,resource_type,service_name,environment,size_gb,storage_tier_type,iops,last_access_days,monthly_cost_usd,attachment_status,snapshot_count,snapshot_size_gb,lifecycle_status,recommendation,projected_monthly_savings_usd
+s3-lendflow-loan-docs-prod,s3-bucket,kyc-document-service,prod,145000,S3 Standard,0,180,3335.0,attached,0,0,active,"Apply Lifecycle: >30d to Standard-IA, >90d to Glacier Instant",1850.0
+s3-lendflow-audit-logs-prod,s3-bucket,platform-compliance,prod,85000,S3 Standard,0,365,1955.0,attached,0,0,active,Apply Lifecycle: >90d to Glacier Flexible (SOC 2 / RBI compliant),1250.0
+s3-lendflow-raw-analytics-prod,s3-bucket,analytics-batch-pipeline,prod,110000,S3 Standard,0,120,2530.0,attached,0,0,active,Enable S3 Intelligent-Tiering for variable analytics data,1100.0
+s3-lendflow-dev-temp-dumps,s3-bucket,sandbox-experimental,dev,35000,S3 Standard,0,150,805.0,attached,0,0,stale,Purge temp test dumps >14 days. Apply 14d TTL lifecycle.,680.0
+vol-0a111111111111111,ebs-volume,loan-application-service,prod,1000,gp2,3000,120,100.0,unattached,12,1200,orphaned,Delete orphaned volume and purge old snapshots,100.0
+vol-0a222222222222222,ebs-volume,underwriting-engine,prod,2000,gp2,6000,180,200.0,unattached,18,2800,orphaned,Delete orphaned volume and purge old snapshots,200.0
+vol-0a333333333333333,ebs-volume,kyc-document-service,staging,1500,gp2,4500,90,150.0,unattached,8,1200,orphaned,Delete orphaned volume,150.0
+vol-0a444444444444444,ebs-volume,perf-testing-load,dev,3000,gp2,9000,140,300.0,unattached,15,3500,orphaned,Delete orphaned volume from perf testing,300.0
+vol-0b111111111111111,ebs-volume,loan-application-service,prod,4000,gp2,12000,1,400.0,attached,45,8000,active,Migrate GP2 to GP3 (20% savings + higher baseline IOPS),80.0
+vol-0b222222222222222,ebs-volume,underwriting-engine,prod,6000,gp2,18000,1,600.0,attached,60,12000,active,Migrate GP2 to GP3,120.0
+vol-0b333333333333333,ebs-volume,payment-gateway-service,prod,2000,gp2,6000,1,200.0,attached,30,4000,active,Migrate GP2 to GP3 (PCI DSS compliant),40.0
+vol-0b444444444444444,ebs-volume,disbursement-engine,prod,3000,gp2,9000,1,300.0,attached,40,6000,active,Migrate GP2 to GP3,60.0
+vol-0b555555555555555,ebs-volume,analytics-batch-pipeline,prod,8000,gp2,24000,1,800.0,attached,90,18000,active,Migrate GP2 to GP3 + purge snapshots >30d,160.0
+vol-0b666666666666666,ebs-volume,feature-store-ml,prod,5000,gp2,15000,1,500.0,attached,50,10000,active,Migrate GP2 to GP3,100.0
+vol-0b777777777777777,ebs-volume,stage-loan-api,staging,2000,gp2,6000,1,200.0,attached,25,3000,active,Migrate GP2 to GP3 & reduce size to 500GB,130.0
+vol-0b888888888888888,ebs-volume,dev-loan-api,dev,2000,gp2,6000,1,200.0,attached,20,2500,active,Migrate GP2 to GP3 & reduce size to 300GB,150.0
+snap-fleet-policy-waste,ebs-snapshots,all-services,all,65000,EBS Snapshot,0,210,3250.0,attached,420,65000,accumulated,Enforce DLM lifecycle: max 30d retention (saves 50% snapshot spend),1000.0

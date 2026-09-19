@@ -1,0 +1,75 @@
+{
+  "AutoScalingGroupName": "asg-lendflow-prod-kyc-ocr-workers",
+  "MinSize": 2,
+  "MaxSize": 16,
+  "DesiredCapacity": 4,
+  "DefaultCooldown": 60,
+  "HealthCheckType": "EC2",
+  "HealthCheckGracePeriod": 60,
+  "VPCZoneIdentifier": "subnet-01a2b3c4d5e6f7001,subnet-01a2b3c4d5e6f7002,subnet-01a2b3c4d5e6f7003",
+  "MixedInstancesPolicy": {
+    "LaunchTemplate": {
+      "LaunchTemplateSpecification": {
+        "LaunchTemplateName": "lt-prod-kyc-ocr-worker-v1",
+        "Version": "$Latest"
+      },
+      "Overrides": [
+        {
+          "InstanceType": "c5.2xlarge"
+        },
+        {
+          "InstanceType": "c5a.2xlarge"
+        },
+        {
+          "InstanceType": "c6i.2xlarge"
+        },
+        {
+          "InstanceType": "m5.2xlarge"
+        }
+      ]
+    },
+    "InstancesDistribution": {
+      "OnDemandAllocationStrategy": "prioritized",
+      "OnDemandBaseCapacity": 1,
+      "OnDemandPercentageAboveBaseCapacity": 20,
+      "SpotAllocationStrategy": "capacity-optimized",
+      "SpotMaxPrice": ""
+    }
+  },
+  "TerminationPolicies": [
+    "OldestInstance",
+    "Default"
+  ],
+  "Tags": [
+    {
+      "Key": "business_unit",
+      "Value": "retail-lending",
+      "PropagateAtLaunch": true
+    },
+    {
+      "Key": "environment",
+      "Value": "prod",
+      "PropagateAtLaunch": true
+    },
+    {
+      "Key": "cost_centre",
+      "Value": "CC-101",
+      "PropagateAtLaunch": true
+    },
+    {
+      "Key": "team",
+      "Value": "lending-core",
+      "PropagateAtLaunch": true
+    },
+    {
+      "Key": "service",
+      "Value": "kyc-ocr",
+      "PropagateAtLaunch": true
+    },
+    {
+      "Key": "compliance_scope",
+      "Value": "soc2-audit",
+      "PropagateAtLaunch": true
+    }
+  ]
+}

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LendFlow Technologies — Executive FinOps Dashboard (CFO & CTO)</title>
+  <style>
+    :root {
+      --bg-primary: #0A1128;
+      --bg-surface: #101F42;
+      --bg-card: rgba(22, 38, 77, 0.7);
+      --border-color: rgba(74, 119, 122, 0.25);
+      --text-primary: #F4F7FB;
+      --text-secondary: #94A3B8;
+      --accent-navy: #1B365D;
+      --accent-teal: #00A896;
+      --accent-green: #10B981;
+      --accent-red: #EF4444;
+      --accent-amber: #F59E0B;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      padding: 24px;
+      line-height: 1.5;
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 24px;
+    }
+
+    .brand-title {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .badge-live {
+      background-color: rgba(16, 185, 129, 0.15);
+      color: var(--accent-green);
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .header-meta {
+      text-align: right;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    /* KPI Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .kpi-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+
+    .kpi-title {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .kpi-value {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .kpi-delta {
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .delta-green { color: var(--accent-green); }
+    .delta-red { color: var(--accent-red); }
+
+    /* Layout Content */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .panel-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Spend Trend Chart Mockup */
+    .trend-bars {
+      display: flex;
+      align-items: flex-end;
+      height: 220px;
+      gap: 14px;
+      padding-top: 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .trend-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bar {
+      width: 100%;
+      border-radius: 4px 4px 0 0;
+      transition: all 0.3s ease;
+    }
+
+    .bar-historical { background: linear-gradient(180deg, #3B82F6 0%, #1D4ED8 100%); }
+    .bar-optimised { background: linear-gradient(180deg, #10B981 0%, #059669 100%); }
+    .bar-target { background: repeating-linear-gradient(45deg, rgba(245,158,11,0.3), rgba(245,158,11,0.3) 10px, rgba(245,158,11,0.5) 10px, rgba(245,158,11,0.5) 20px); border: 1px dashed var(--accent-amber); }
+
+    .bar-label { font-size: 11px; color: var(--text-secondary); }
+    .bar-val { font-size: 11px; font-weight: 600; }
+
+    /* Service Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    th {
+      text-align: left;
+      padding: 10px 12px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border-color);
+      font-weight: 600;
+    }
+
+    td {
+      padding: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    /* Documentation Footer */
+    .dashboard-meta-footer {
+      background: rgba(16, 31, 66, 0.4);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 18px 24px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .meta-item strong { color: var(--text-primary); display: block; margin-bottom: 4px; }
+  </style>
+</head>
+<body>
+
+  <header class="dashboard-header">
+    <div>
+      <div class="brand-title">
+        <span>LendFlow Technologies</span>
+        <span class="badge-live">EXECUTIVE BOARD VIEW</span>
+      </div>
+      <p style="color: var(--text-secondary); font-size: 14px; margin-top: 4px;">
+        Cloud Infrastructure Cost Optimisation & FinOps Framework — Monthly Executive Status
+      </p>
+    </div>
+    <div class="header-meta">
+      <div>Primary Cloud: <strong>AWS ap-south-1 (Mumbai)</strong></div>
+      <div>Financial Authority: <strong>Priya Menon (CFO) | Arjun Deshmukh (CTO)</strong></div>
+      <div>Reporting Baseline: <strong>Month 12 (September 2026)</strong></div>
+    </div>
+  </header>
+
+  <!-- KPI Cards -->
+  <section class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-title">Current Monthly Spend</div>
+      <div class="kpi-value">$180,000.00</div>
+      <div class="kpi-delta delta-red">▲ +260.0% vs Month 1 ($50k)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-title">Target Run-Rate (Post-FinOps)</div>
+      <div class="kpi-value">$115,750.00</div>
+      <div class="kpi-delta delta-green">▼ -35.7% ($64,250.00/mo savings)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-title">Unit Cost / Loan Application</div>
+      <div class="kpi-value">$0.223</div>
+      <div class="kpi-delta delta-green">▼ -35.5% vs Current ($0.346)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-title">Savings Plans / RI Coverage</div>
+      <div class="kpi-value">75.0%</div>
+      <div class="kpi-delta delta-green">▲ Up from 0.0% Baseline</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-title">Untagged Dark Spend</div>
+      <div class="kpi-value">&lt; 2.0%</div>
+      <div class="kpi-delta delta-green">▼ Down from 41.9% ($75.4k)</div>
+    </div>
+  </section>
+
+  <!-- Content Grid -->
+  <div class="content-grid">
+    <!-- Spend Trend -->
+    <div class="panel">
+      <div class="panel-title">
+        <span>12-Month Spend Progression & 3-Month Realisation Forecast</span>
+        <span style="font-size: 12px; color: var(--text-secondary);">Amounts in USD ($)</span>
+      </div>
+      <div class="trend-bars">
+        <div class="trend-col">
+          <div class="bar-val">$50k</div>
+          <div class="bar bar-historical" style="height: 55px;"></div>
+          <div class="bar-label">M1</div>
+        </div>
+        <div class="trend-col">
+          <div class="bar-val">$72k</div>
+          <div class="bar bar-historical" style="height: 80px;"></div>
+          <div class="bar-label">M4</div>
+        </div>
+        <div class="trend-col">
+          <div class="bar-val">$112k</div>
+          <div class="bar-historical bar" style="height: 124px;"></div>
+          <div class="bar-label">M7</div>
+        </div>
+        <div class="trend-col">
+          <div class="bar-val">$154k</div>
+          <div class="bar bar-historical" style="height: 171px;"></div>
+          <div class="bar-label">M10</div>
+        </div>
+        <div class="trend-col">
+          <div class="bar-val" style="color: var(--accent-red);">$180k</div>
+          <div class="bar bar-historical" style="height: 200px; background: #EF4444;"></div>
+          <div class="bar-label">M12 (Now)</div>
+        </div>
+        <div class="trend-col">
+          <div class="bar-val" style="color: var(--accent-green);">$162k</div>
+          <div class="bar bar-optimised" style="height: 180px;"></div>
+          <div class="bar-label">+30d</div>
+        </div>
+        <div class="trend-col">
+          <div class="bar-val" style="color: var(--accent-green);">$136k</div>
+          <div class="bar bar-optimised" style="height: 151px;"></div>
+          <div class="bar-label">+60d</div>
+        </div>
+        <div class="trend-col">
+          <div class="bar-val" style="color: var(--accent-green); font-weight: 700;">$115.7k</div>
+          <div class="bar bar-optimised" style="height: 128px; border: 2px solid #34D399;"></div>
+          <div class="bar-label">+90d (Target)</div>
+        </div>
+      </div>
+      <div style="margin-top: 14px; display: flex; gap: 20px; font-size: 12px; color: var(--text-secondary);">
+        <div><span style="color: #3B82F6;">■</span> Historical Actuals</div>
+        <div><span style="color: #EF4444;">■</span> Baseline Peak (M12)</div>
+        <div><span style="color: #10B981;">■</span> 90-Day Realised Target ($115,750)</div>
+      </div>
+    </div>
+
+    <!-- Top 5 Service Drivers -->
+    <div class="panel">
+      <div class="panel-title">
+        <span>Top 5 AWS Cost Drivers (M12)</span>
+        <span style="font-size: 12px; color: var(--text-secondary);">84% of Spend</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Service</th>
+            <th>Monthly ($)</th>
+            <th>Share</th>
+            <th>Optimised ($)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>EC2 Compute</strong></td>
+            <td>$61,200</td>
+            <td>34.0%</td>
+            <td style="color: var(--accent-green); font-weight:600;">$32,150</td>
+          </tr>
+          <tr>
+            <td><strong>RDS PostgreSQL</strong></td>
+            <td>$39,600</td>
+            <td>22.0%</td>
+            <td style="color: var(--accent-green); font-weight:600;">$29,800</td>
+          </tr>
+          <tr>
+            <td><strong>Data Transfer / NAT</strong></td>
+            <td>$30,600</td>
+            <td>17.0%</td>
+            <td style="color: var(--accent-green); font-weight:600;">$14,240</td>
+          </tr>
+          <tr>
+            <td><strong>S3 Storage</strong></td>
+            <td>$19,800</td>
+            <td>11.0%</td>
+            <td style="color: var(--accent-green); font-weight:600;">$15,600</td>
+          </tr>
+          <tr>
+            <td><strong>ElastiCache Redis</strong></td>
+            <td>$12,600</td>
+            <td>7.0%</td>
+            <td style="color: var(--accent-green); font-weight:600;">$8,400</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Documentation Footer -->
+  <footer class="dashboard-meta-footer">
+    <div class="meta-item">
+      <strong>Data Sources</strong>
+      AWS Cost & Usage Report (CUR), CloudWatch Billing API, Redshift FinOps Lake.
+    </div>
+    <div class="meta-item">
+      <strong>Refresh Frequency</strong>
+      Every 6 Hours (Automated ingestion via EventBridge & Glue Crawler).
+    </div>
+    <div class="meta-item">
+      <strong>RBAC Permissions</strong>
+      Role: <code>FinOpsExecutiveViewer</code> (CFO, CTO, VP Eng, Board Members).
+    </div>
+    <div class="meta-item">
+      <strong>Actionable Executive Insight</strong>
+      $64,250/mo savings achievable within 90 days with $18,000 upfront CSP capital (1.23-month payback).
+    </div>
+  </footer>
+
+</body>
+</html>

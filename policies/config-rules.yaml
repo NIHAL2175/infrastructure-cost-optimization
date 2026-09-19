@@ -1,0 +1,71 @@
+# LendFlow Technologies — AWS Config Conformance Pack for FinOps & Tag Governance
+# Deployment Target: AWS CloudFormation / AWS Organizations Config Conformance Pack
+
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'LendFlow FinOps detective governance: Tag compliance, low utilization, and storage hygiene rules.'
+
+Resources:
+  # 1. Mandatory Tag Compliance Rule for EC2, RDS, S3
+  FinOpsRequiredTagsRule:
+    Type: AWS::Config::ConfigRule
+    Properties:
+      ConfigRuleName: lendflow-required-tags-compliance
+      Description: 'Evaluates whether EC2 instances, EBS volumes, RDS DBs, and S3 buckets carry mandatory FinOps tags.'
+      Scope:
+        ComplianceResourceTypes:
+          - AWS::EC2::Instance
+          - AWS::EC2::Volume
+          - AWS::RDS::DBInstance
+          - AWS::S3::Bucket
+      Source:
+        Owner: AWS
+        SourceIdentifier: REQUIRED_TAGS
+      InputParameters:
+        tag1Key: business_unit
+        tag2Key: environment
+        tag3Key: cost_centre
+        tag4Key: team
+        tag5Key: service
+        tag6Key: created_by
+
+  # 2. Low Utilization EC2 Instance Detection Rule (<20% CPU)
+  FinOpsLowCpuUtilizationRule:
+    Type: AWS::Config::ConfigRule
+    Properties:
+      ConfigRuleName: lendflow-ec2-low-cpu-utilization-audit
+      Description: 'Detects EC2 instances with sustained average CPU utilization below 20% over 14 days.'
+      Scope:
+        ComplianceResourceTypes:
+          - AWS::EC2::Instance
+      Source:
+        Owner: AWS
+        SourceIdentifier: EC2_LOW_CPU_UTILIZATION_CHECK
+      MaximumExecutionFrequency: TwentyFour_Hours
+
+  # 3. S3 Bucket Lifecycle Configuration Check
+  FinOpsS3LifecycleConfigRule:
+    Type: AWS::Config::ConfigRule
+    Properties:
+      ConfigRuleName: lendflow-s3-lifecycle-policy-present
+      Description: 'Ensures all S3 buckets have active lifecycle transition and expiration rules configured.'
+      Scope:
+        ComplianceResourceTypes:
+          - AWS::S3::Bucket
+      Source:
+        Owner: AWS
+        SourceIdentifier: S3_LIFECYCLE_POLICY_CHECK
+      MaximumExecutionFrequency: TwentyFour_Hours
+
+  # 4. Unattached Orphan EBS Volumes Detection Rule
+  FinOpsUnattachedEbsVolumeRule:
+    Type: AWS::Config::ConfigRule
+    Properties:
+      ConfigRuleName: lendflow-ebs-unattached-volume-audit
+      Description: 'Flags EBS volumes in AVAILABLE status (unattached to any EC2 instance) for >24 hours.'
+      Scope:
+        ComplianceResourceTypes:
+          - AWS::EC2::Volume
+      Source:
+        Owner: AWS
+        SourceIdentifier: EC2_VOLUME_IN_USE_CHECK
+      MaximumExecutionFrequency: Twelve_Hours

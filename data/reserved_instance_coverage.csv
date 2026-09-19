@@ -1,0 +1,10 @@
+instance_family,workload_category,active_instance_count,monthly_hours,current_on_demand_spend_usd,current_ri_coverage_pct,current_sp_coverage_pct,rate_1yr_no_upfront_usd,rate_1yr_partial_upfront_usd,rate_3yr_partial_upfront_usd,recommended_commitment_strategy,projected_monthly_savings_usd
+c5.4xlarge,Compute Optimized,10,7200,4896.0,0.0,0.0,3182.4,2937.6,2448.0,"Right-size first to c5.2xlarge, then cover remaining prod baseline with 1-Yr Partial Upfront CSP",1958.4
+c5.2xlarge,Compute Optimized,14,10080,3427.2,0.0,0.0,2227.68,2056.32,1713.6,Cover 8 prod baseline instances with 1-Yr Compute Savings Plan,1370.88
+r5.4xlarge,Memory Optimized,6,4320,4354.56,0.0,0.0,2830.46,2612.74,2177.28,"Right-size to r5.2xlarge, cover prod DB & Scoring with 1-Yr CSP",1741.82
+r5.2xlarge,Memory Optimized,8,5760,2903.04,0.0,0.0,1886.98,1741.82,1451.52,Cover prod instances with 1-Yr Partial Upfront CSP,1161.22
+m5.2xlarge,General Purpose,6,4320,1658.88,0.0,0.0,1078.27,995.33,829.44,"Right-size to m5.xlarge, commit baseline to 1-Yr CSP",663.55
+m5.xlarge,General Purpose,8,5760,1105.92,0.0,0.0,718.85,663.55,552.96,Cover prod disbursement baseline with 1-Yr CSP,442.37
+db.r5.2xlarge,RDS PostgreSQL Multi-AZ,2,1440,2822.4,0.0,0.0,1834.56,1693.44,1411.2,1-Yr Partial Upfront RDS Reserved Instance for Primary Prod DB,1128.96
+db.r5.xlarge,RDS PostgreSQL Multi-AZ,2,1440,1411.2,0.0,0.0,917.28,846.72,705.6,1-Yr Partial Upfront RDS Reserved Instance for Payment Core DB,564.48
+cache.r5.large,ElastiCache Redis Cluster,4,2880,1152.0,0.0,0.0,748.8,691.2,576.0,1-Yr Partial Upfront ElastiCache Reserved Node,460.8

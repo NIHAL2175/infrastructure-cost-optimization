@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LendFlow Technologies — FinOps & Cloud Cost Optimisation Portal</title>
+  <style>
+    :root {
+      --bg-primary: #0A1128;
+      --bg-surface: #101F42;
+      --bg-card: rgba(22, 38, 77, 0.7);
+      --border-color: rgba(74, 119, 122, 0.25);
+      --text-primary: #F4F7FB;
+      --text-secondary: #94A3B8;
+      --accent-teal: #00A896;
+      --accent-green: #10B981;
+      --accent-blue: #38BDF8;
+      --accent-purple: #A855F7;
+      --accent-amber: #F59E0B;
+      --accent-red: #EF4444;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      padding: 32px 24px;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      background: rgba(0, 168, 150, 0.15);
+      color: var(--accent-teal);
+      border: 1px solid rgba(0, 168, 150, 0.3);
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Metric Grid */
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .metric-box {
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .metric-val {
+      font-size: 26px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .metric-lbl {
+      font-size: 12px;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    /* Section Title */
+    .section-heading {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent-teal);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Card Grid */
+    .portal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .portal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .portal-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-teal);
+      box-shadow: 0 12px 30px rgba(0, 168, 150, 0.15);
+    }
+
+    .card-tag {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 12px;
+      width: fit-content;
+    }
+
+    .tag-exec { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); }
+    .tag-eng { background: rgba(56, 189, 248, 0.15); color: var(--accent-blue); }
+    .tag-team { background: rgba(168, 85, 247, 0.15); color: var(--accent-purple); }
+    .tag-pres { background: rgba(245, 158, 11, 0.15); color: var(--accent-amber); }
+    .tag-doc { background: rgba(148, 163, 184, 0.15); color: var(--text-secondary); }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 18px;
+      flex: 1;
+    }
+
+    .card-link-text {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent-teal);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Document Links List */
+    .docs-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    .doc-item {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px 18px;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s ease;
+    }
+
+    .doc-item:hover {
+      border-color: var(--accent-blue);
+      background: rgba(30, 41, 59, 0.8);
+    }
+
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-secondary);
+      padding-top: 24px;
+      border-top: 1px solid var(--border-color);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="badge">FinOps CoE Production Hub</div>
+      <h1>LendFlow Technologies</h1>
+      <p class="subtitle">
+        Infrastructure Cost Optimisation & FinOps Operating Framework — Local Access Portal
+      </p>
+    </header>
+
+    <!-- Top Headline Metrics -->
+    <div class="metric-grid">
+      <div class="metric-box">
+        <div class="metric-val" style="color: var(--accent-red);">$180,000</div>
+        <div class="metric-lbl">Baseline Monthly Spend</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-val" style="color: var(--accent-green);">$64,250</div>
+        <div class="metric-lbl">Monthly Net Savings</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-val" style="color: var(--accent-teal);">$115,750</div>
+        <div class="metric-lbl">Target Monthly Run-Rate</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-val" style="color: var(--accent-amber);">35.7%</div>
+        <div class="metric-lbl">Net Cost Reduction</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-val" style="color: var(--accent-blue);">$0.223</div>
+        <div class="metric-lbl">Target Cost / Loan App</div>
+      </div>
+    </div>
+
+    <!-- Primary Interactive Dashboards -->
+    <div class="section-heading">
+      <span>Interactive Dashboards & Presentation</span>
+    </div>
+    <div class="portal-grid">
+      <a href="dashboards/executive-dashboard.html" class="portal-card">
+        <div>
+          <span class="card-tag tag-exec">CFO / CTO Executive</span>
+          <div class="card-title">Executive Strategic Dashboard</div>
+          <div class="card-desc">
+            Macro-level visibility into monthly spend, budget vs actual variance, 12-month spend progression, 90-day realization forecast, and unit economics.
+          </div>
+        </div>
+        <div class="card-link-text">Open Executive Dashboard &rarr;</div>
+      </a>
+
+      <a href="dashboards/engineering-dashboard.html" class="portal-card">
+        <div>
+          <span class="card-tag tag-eng">Engineering Manager</span>
+          <div class="card-title">Engineering Tactical Dashboard</div>
+          <div class="card-desc">
+            Fleet CPU and RAM telemetry, active rightsizing backlog queue (28 instances), squad showback scorecards, and tag compliance monitoring.
+          </div>
+        </div>
+        <div class="card-link-text">Open Engineering Dashboard &rarr;</div>
+      </a>
+
+      <a href="dashboards/team-dashboard.html" class="portal-card">
+        <div>
+          <span class="card-tag tag-team">Squad & Microservice</span>
+          <div class="card-title">Service Level Dashboard</div>
+          <div class="card-desc">
+            Real-time daily burn rate, deployment cost deltas, auto-scaling telemetry, unit costs per API call, and live FinOps activity feeds.
+          </div>
+        </div>
+        <div class="card-link-text">Open Service Dashboard &rarr;</div>
+      </a>
+
+      <a href="dashboards/simulation-war-room.html" class="portal-card" style="border-color: var(--accent-teal); box-shadow: 0 0 20px rgba(0, 168, 150, 0.2);">
+        <div>
+          <span class="card-tag" style="background: rgba(0, 168, 150, 0.2); color: var(--accent-teal);">Interactive Gamified Simulation</span>
+          <div class="card-title">CLOUDBURN — War Room Simulator</div>
+          <div class="card-desc">
+            Playable 6-level interactive simulation: campaign sprint, live financial HUD ($180k to $115.7k), stakeholder sentiment engine, and 10 unlockable achievement badges.
+          </div>
+        </div>
+        <div class="card-link-text">Enter War Room Simulator &rarr;</div>
+      </a>
+
+      <a href="presentation/cfo-presentation.html" class="portal-card">
+        <div>
+          <span class="card-tag tag-pres">Board of Directors</span>
+          <div class="card-title">CFO Review Panel Presentation Deck</div>
+          <div class="card-desc">
+            Interactive, keyboard-navigable 20-slide executive presentation detailing the business case, savings waterfall, Spot architecture, and decision request.
+          </div>
+        </div>
+        <div class="card-link-text">Launch Presentation Deck &rarr;</div>
+      </a>
+    </div>
+
+    <!-- Technical Reports & Documentation -->
+    <div class="section-heading">
+      <span>Master Documentation & Financial Models</span>
+    </div>
+    <div class="docs-list">
+      <a href="docs/cost-audit-report.md" class="doc-item">
+        <span>📄 Master Cost Audit Report</span>
+        <span style="color: var(--accent-teal);">&rarr;</span>
+      </a>
+      <a href="docs/optimisation-recommendations.md" class="doc-item">
+        <span>📋 16 Optimisation Recommendations</span>
+        <span style="color: var(--accent-teal);">&rarr;</span>
+      </a>
+      <a href="docs/simulation-concept.md" class="doc-item">
+        <span>🎮 CLOUDBURN Simulation Concept & Badges</span>
+        <span style="color: var(--accent-teal);">&rarr;</span>
+      </a>
+      <a href="docs/case-studies.md" class="doc-item">
+        <span>📚 4 Real-World Case Studies</span>
+        <span style="color: var(--accent-teal);">&rarr;</span>
+      </a>
+      <a href="docs/stakeholder-priority-matrix.md" class="doc-item">
+        <span>🤝 Stakeholder Priority Matrix & RACI</span>
+        <span style="color: var(--accent-teal);">&rarr;</span>
+      </a>
+      <a href="docs/auto-scaling-policies.md" class="doc-item">
+        <span>⚡ Auto-Scaling Architecture & Policies</span>
+        <span style="color: var(--accent-teal);">&rarr;</span>
+      </a>
+      <a href="docs/ri-spot-strategy.md" class="doc-item">
+        <span>🎯 Savings Plans & Spot Strategy</span>
+        <span style="color: var(--accent-teal);">&rarr;</span>
+      </a>
+      <a href="docs/tagging-taxonomy.md" class="doc-item">
+        <span>🏷️ 10-Tag Taxonomy & Governance</span>
+        <span style="color: var(--accent-teal);">&rarr;</span>
+      </a>
+      <a href="docs/governance-model.md" class="doc-item">
+        <span>🏛️ FinOps Operating Model & RACI</span>
+        <span style="color: var(--accent-teal);">&rarr;</span>
+      </a>
+      <a href="docs/anomaly-detection.md" class="doc-item">
+        <span>🚨 Cost Anomaly Framework & Runbook</span>
+        <span style="color: var(--accent-teal);">&rarr;</span>
+      </a>
+      <a href="docs/review-process.md" class="doc-item">
+        <span>📈 Review Process & Maturity OKRs</span>
+        <span style="color: var(--accent-teal);">&rarr;</span>
+      </a>
+      <a href="analysis/savings-model.xlsx" class="doc-item">
+        <span>📊 Master Savings Model (Excel)</span>
+        <span style="color: var(--accent-green);">Download &rarr;</span>
+      </a>
+      <a href="analysis/billing-analysis.xlsx" class="doc-item">
+        <span>📈 12-Month Billing Analysis (Excel)</span>
+        <span style="color: var(--accent-green);">Download &rarr;</span>
+      </a>
+      <a href="presentation/cfo-presentation.md" class="doc-item">
+        <span>📑 CFO Presentation Full Transcript</span>
+        <span style="color: var(--accent-teal);">&rarr;</span>
+      </a>
+      <a href="CHANGELOG.md" class="doc-item">
+        <span>📜 15-Stage Release Changelog</span>
+        <span style="color: var(--accent-teal);">&rarr;</span>
+      </a>
+    </div>
+
+    <footer>
+      LendFlow Technologies FinOps Center of Excellence &bull; AWS Cloud Infrastructure Cost Optimisation Project &bull; Primary Region: <code>ap-south-1</code> (Mumbai)
+    </footer>
+  </div>
+
+</body>
+</html>

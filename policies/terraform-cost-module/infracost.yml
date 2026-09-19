@@ -1,0 +1,23 @@
+# LendFlow Technologies — Infracost CI/CD Cost Visibility Configuration
+version: 0.1
+
+projects:
+  - path: .
+    name: lendflow-core-infrastructure
+    terraform_var_files:
+      - terraform.tfvars
+
+# Automated FinOps Pull Request Guardrails
+currency: USD
+
+# CI/CD PR Cost Policies & Threshold Gates
+policies:
+  - name: block_major_monthly_overruns
+    description: "Fail CI/CD build if a Pull Request increases monthly AWS expenditure by more than $500/month without CFO pre-approval"
+    query: "monthlyCost > 500"
+    failure_action: "fail"
+
+  - name: warn_moderate_cost_increase
+    description: "Post advisory warning comment to PR if monthly cost delta exceeds $100/month"
+    query: "monthlyCost > 100"
+    failure_action: "warn"

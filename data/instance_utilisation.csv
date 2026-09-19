@@ -1,0 +1,41 @@
+instance_id,instance_name,service_name,environment,team,instance_type,vcpu,mem_gb,avg_cpu_pct,peak_cpu_pct,avg_mem_pct,peak_mem_pct,hours_running_monthly,monthly_cost_usd,recommended_action,projected_monthly_savings_usd,technical_notes
+i-0a1122334455aa01,prod-loan-api-01,loan-application-service,prod,lending-core,c5.4xlarge,16,32,18.2,38.5,34.0,52.0,720,489.6,c5.2xlarge,244.8,Sustained CPU <20% for 30 days. Downsize to c5.2xlarge.
+i-0a1122334455aa02,prod-loan-api-02,loan-application-service,prod,lending-core,c5.4xlarge,16,32,17.5,36.0,32.5,51.0,720,489.6,c5.2xlarge,244.8,Sustained CPU <20% for 30 days. Downsize to c5.2xlarge.
+i-0a1122334455aa03,prod-loan-api-03,loan-application-service,prod,lending-core,c5.4xlarge,16,32,16.9,35.1,33.1,49.5,720,489.6,c5.2xlarge,244.8,Sustained CPU <20% for 30 days. Downsize to c5.2xlarge.
+i-0a1122334455aa04,prod-loan-api-04,loan-application-service,prod,lending-core,c5.4xlarge,16,32,19.1,39.2,35.2,53.2,720,489.6,c5.2xlarge,244.8,Sustained CPU <20% for 30 days. Downsize to c5.2xlarge.
+i-0b2233445566bb01,prod-risk-scoring-01,underwriting-engine,prod,risk-scoring,r5.4xlarge,16,128,14.5,28.0,28.0,42.0,720,725.76,r5.2xlarge,362.88,Oversized memory & CPU. Avg memory 28%. Downsize to r5.2xlarge.
+i-0b2233445566bb02,prod-risk-scoring-02,underwriting-engine,prod,risk-scoring,r5.4xlarge,16,128,13.8,27.2,27.5,41.0,720,725.76,r5.2xlarge,362.88,Oversized memory & CPU. Downsize to r5.2xlarge.
+i-0b2233445566bb03,prod-risk-scoring-03,underwriting-engine,prod,risk-scoring,r5.4xlarge,16,128,15.1,29.5,29.2,43.1,720,725.76,r5.2xlarge,362.88,Oversized memory & CPU. Downsize to r5.2xlarge.
+i-0c3344556677cc01,prod-bureau-conn-01,credit-bureau-connector,prod,risk-scoring,m5.2xlarge,8,32,11.2,22.0,22.4,35.0,720,276.48,m5.large,207.36,IO bound connector. CPU avg 11%. Downsize to m5.large.
+i-0c3344556677cc02,prod-bureau-conn-02,credit-bureau-connector,prod,risk-scoring,m5.2xlarge,8,32,10.8,21.5,21.8,34.0,720,276.48,m5.large,207.36,IO bound connector. Downsize to m5.large.
+i-0d4455667788dd01,prod-kyc-ocr-01,kyc-document-service,prod,lending-core,c5.4xlarge,16,32,12.0,31.0,25.0,44.0,720,489.6,c5.2xlarge (Spot Mix),342.72,Batch OCR processing. Migrate to 70% Spot ASG with c5.2xlarge.
+i-0d4455667788dd02,prod-kyc-ocr-02,kyc-document-service,prod,lending-core,c5.4xlarge,16,32,11.5,30.2,24.1,42.5,720,489.6,c5.2xlarge (Spot Mix),342.72,Batch OCR processing. Migrate to 70% Spot ASG with c5.2xlarge.
+i-0d4455667788dd03,prod-kyc-ocr-03,kyc-document-service,prod,lending-core,c5.4xlarge,16,32,12.8,32.1,26.0,45.0,720,489.6,c5.2xlarge (Spot Mix),342.72,Batch OCR processing. Migrate to 70% Spot ASG with c5.2xlarge.
+i-0e5566778899ee01,prod-payment-gw-01,payment-gateway-service,prod,payments,c5.2xlarge,8,16,38.0,68.0,45.0,62.0,720,244.8,Retain / CSP 1-Yr,73.44,PCI DSS scope. Well-utilised. Apply 1-Yr Savings Plan.
+i-0e5566778899ee02,prod-payment-gw-02,payment-gateway-service,prod,payments,c5.2xlarge,8,16,36.5,65.0,44.0,60.5,720,244.8,Retain / CSP 1-Yr,73.44,PCI DSS scope. Well-utilised. Apply 1-Yr Savings Plan.
+i-0f6677889900ff01,prod-disburse-01,disbursement-engine,prod,payments,m5.2xlarge,8,32,19.5,41.0,31.0,48.0,720,276.48,m5.xlarge,138.24,Downsize to m5.xlarge. Multi-AZ maintained.
+i-0f6677889900ff02,prod-disburse-02,disbursement-engine,prod,payments,m5.2xlarge,8,32,18.2,39.5,30.2,46.5,720,276.48,m5.xlarge,138.24,Downsize to m5.xlarge. Multi-AZ maintained.
+i-107788990011aa01,prod-analytics-worker-01,analytics-batch-pipeline,prod,data-eng,r5.4xlarge,16,128,8.5,45.0,18.0,52.0,720,725.76,r5.2xlarge (Spot),544.32,Runs batch analytics 4h/day but kept 24/7. Convert to ASG Spot.
+i-107788990011aa02,prod-analytics-worker-02,analytics-batch-pipeline,prod,data-eng,r5.4xlarge,16,128,7.8,42.0,17.5,50.0,720,725.76,r5.2xlarge (Spot),544.32,Runs batch analytics 4h/day but kept 24/7. Convert to ASG Spot.
+i-118899001122bb01,prod-notification-01,notification-service,prod,platform,t3.xlarge,4,16,15.0,32.0,25.0,40.0,720,119.81,t3.medium,79.87,Low CPU push service. Downsize to t3.medium.
+i-118899001122bb02,prod-notification-02,notification-service,prod,platform,t3.xlarge,4,16,14.2,30.5,24.5,39.0,720,119.81,t3.medium,79.87,Low CPU push service. Downsize to t3.medium.
+i-201122334455cc01,stage-loan-api-01,loan-application-service,staging,lending-core,c5.2xlarge,8,16,3.2,12.0,18.0,25.0,720,244.8,t3.xlarge + Schedule,178.6,Idle 24/7. Downsize to t3.xlarge and stop on nights/weekends.
+i-201122334455cc02,stage-loan-api-02,loan-application-service,staging,lending-core,c5.2xlarge,8,16,2.8,11.5,17.5,24.0,720,244.8,t3.xlarge + Schedule,178.6,Idle 24/7. Downsize to t3.xlarge and stop on nights/weekends.
+i-212233445566dd01,stage-risk-scoring-01,underwriting-engine,staging,risk-scoring,r5.2xlarge,8,64,4.1,15.0,12.0,22.0,720,362.88,t3.xlarge + Schedule,282.98,Oversized for staging. Downsize + schedule 9am-7pm weekdays.
+i-223344556677ee01,stage-bureau-conn-01,credit-bureau-connector,staging,risk-scoring,m5.xlarge,4,16,2.1,8.0,14.0,20.0,720,138.24,t3.medium + Schedule,111.6,Downsize + schedule 9am-7pm weekdays.
+i-234455667788ff01,stage-kyc-ocr-01,kyc-document-service,staging,lending-core,c5.2xlarge,8,16,2.5,9.0,15.0,21.0,720,244.8,t3.large + Schedule,196.9,Downsize + schedule 9am-7pm weekdays.
+i-245566778899aa01,stage-payment-gw-01,payment-gateway-service,staging,payments,c5.xlarge,4,8,1.8,7.0,16.0,22.0,720,122.4,t3.medium + Schedule,95.8,Downsize + schedule 9am-7pm weekdays.
+i-256677889900bb01,stage-disburse-01,disbursement-engine,staging,payments,m5.xlarge,4,16,2.0,8.5,15.5,21.0,720,138.24,t3.medium + Schedule,111.6,Downsize + schedule 9am-7pm weekdays.
+i-267788990011cc01,stage-analytics-01,analytics-batch-pipeline,staging,data-eng,r5.2xlarge,8,64,3.5,14.0,14.0,25.0,720,362.88,t3.xlarge + Schedule,282.98,Downsize + schedule 9am-7pm weekdays.
+i-278899001122dd01,stage-notification-01,notification-service,staging,platform,t3.large,2,8,1.5,6.0,12.0,18.0,720,59.9,t3.small + Schedule,47.92,Downsize + schedule 9am-7pm weekdays.
+i-301122334455ee01,dev-loan-api-01,loan-application-service,dev,lending-core,c5.2xlarge,8,16,1.2,8.0,12.0,18.0,720,244.8,t3.medium + Schedule,218.2,Dev cluster running 24/7. Auto-stop after hours + downsize.
+i-301122334455ee02,dev-loan-api-02,loan-application-service,dev,lending-core,c5.2xlarge,8,16,1.0,7.5,11.5,17.0,720,244.8,Terminate (redundant),244.8,Redundant dev node. Single node sufficient for dev.
+i-312233445566ff01,dev-risk-scoring-01,underwriting-engine,dev,risk-scoring,r5.2xlarge,8,64,2.0,9.0,10.0,16.0,720,362.88,t3.large + Schedule,322.9,Downsize to t3.large + Auto-stop 7pm-9am and weekends.
+i-323344556677aa01,dev-bureau-conn-01,credit-bureau-connector,dev,risk-scoring,m5.large,2,8,1.1,5.0,10.0,15.0,720,69.12,t3.small + Schedule,57.14,Downsize + Auto-stop.
+i-334455667788bb01,dev-kyc-ocr-01,kyc-document-service,dev,lending-core,c5.2xlarge,8,16,1.5,7.0,11.0,17.0,720,244.8,t3.medium + Schedule,218.2,Downsize + Auto-stop.
+i-345566778899cc01,dev-payment-gw-01,payment-gateway-service,dev,payments,c5.xlarge,4,8,0.9,4.5,12.0,16.0,720,122.4,t3.small + Schedule,108.42,Mock payment service. t3.small sufficient.
+i-356677889900dd01,dev-disburse-01,disbursement-engine,dev,payments,m5.large,2,8,1.0,5.0,11.0,16.0,720,69.12,t3.small + Schedule,57.14,Downsize + Auto-stop.
+i-367788990011ee01,dev-analytics-01,analytics-batch-pipeline,dev,data-eng,r5.2xlarge,8,64,1.8,8.0,12.0,18.0,720,362.88,t3.large + Schedule,322.9,Downsize + Auto-stop.
+i-378899001122ff01,dev-feature-store-01,feature-store-ml,dev,data-eng,m5.2xlarge,8,32,1.4,6.0,15.0,20.0,720,276.48,t3.large + Schedule,236.5,Downsize + Auto-stop.
+i-389900112233aa01,dev-test-sandbox-01,sandbox-experimental,dev,lending-core,m5.4xlarge,16,64,0.2,1.5,5.0,8.0,720,552.96,Terminate (Abandoned),552.96,Abandoned sandbox created 4 months ago. Terminate immediately.
+i-390011223344bb01,dev-perf-test-01,perf-testing-load,dev,platform,c5.4xlarge,16,32,0.1,0.8,4.0,6.0,720,489.6,Terminate (Abandoned),489.6,Ad-hoc load test instance left running. Terminate immediately.

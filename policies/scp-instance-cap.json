@@ -1,0 +1,63 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyOversizedInstancesInNonProd",
+      "Effect": "Deny",
+      "Action": [
+        "ec2:RunInstances"
+      ],
+      "Resource": "arn:aws:ec2:*:*:instance/*",
+      "Condition": {
+        "StringLike": {
+          "aws:RequestTag/environment": [
+            "dev",
+            "staging",
+            "sandbox"
+          ]
+        },
+        "ForAnyValue:StringLike": {
+          "ec2:InstanceType": [
+            "*.4xlarge",
+            "*.8xlarge",
+            "*.12xlarge",
+            "*.16xlarge",
+            "*.24xlarge",
+            "*.32xlarge",
+            "*.metal"
+          ]
+        },
+        "StringNotLike": {
+          "aws:PrincipalArn": [
+            "arn:aws:iam::*:role/LendFlowFinOpsAdminRole",
+            "arn:aws:iam::*:role/aws-service-role/*"
+          ]
+        }
+      }
+    },
+    {
+      "Sid": "DenyOversizedInstancesWithoutFinOpsApprovalInProd",
+      "Effect": "Deny",
+      "Action": [
+        "ec2:RunInstances"
+      ],
+      "Resource": "arn:aws:ec2:*:*:instance/*",
+      "Condition": {
+        "ForAnyValue:StringLike": {
+          "ec2:InstanceType": [
+            "*.16xlarge",
+            "*.24xlarge",
+            "*.32xlarge",
+            "*.metal"
+          ]
+        },
+        "StringNotLike": {
+          "aws:PrincipalArn": [
+            "arn:aws:iam::*:role/LendFlowFinOpsAdminRole",
+            "arn:aws:iam::*:role/aws-service-role/*"
+          ]
+        }
+      }
+    }
+  ]
+}

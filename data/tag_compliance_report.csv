@@ -1,0 +1,15 @@
+resource_id,resource_type,environment,team,business_unit,tag_cost_centre,tag_product,tag_compliance_scope,tag_ttl,tag_data_classification,tag_created_by,compliance_status,missing_mandatory_tags,monthly_spend_usd,allocation_category
+ec2-prod-loan-api-01,ec2-instance,prod,lending-core,Retail Lending,CC-101,LoanApp,PCI-Scope,None,Confidential,terraform,COMPLIANT,0,489.6,Fully Allocated
+ec2-prod-risk-scoring-01,ec2-instance,prod,risk-scoring,Risk & Underwriting,CC-102,RiskEngine,SOC2-Scope,None,Restricted,terraform,COMPLIANT,0,725.76,Fully Allocated
+ec2-stage-loan-api-01,ec2-instance,staging,lending-core,Retail Lending,CC-101,LoanApp,None,30d,Internal,manual-console,NON_COMPLIANT,3,244.8,Partially Allocated
+ec2-dev-loan-api-02,ec2-instance,dev,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,None,None,UNKNOWN,arjun.d,NON_COMPLIANT,7,244.8,Dark Spend (Untagged)
+ec2-dev-perf-test-01,ec2-instance,dev,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,None,None,UNKNOWN,ad-hoc-test,NON_COMPLIANT,8,489.6,Dark Spend (Untagged)
+ec2-dev-test-sandbox-01,ec2-instance,dev,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,None,None,UNKNOWN,sanjay.p,NON_COMPLIANT,8,552.96,Dark Spend (Untagged)
+vol-0a111111111111111,ebs-volume,prod,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,None,None,UNKNOWN,legacy,NON_COMPLIANT,8,100.0,Dark Spend (Orphaned)
+vol-0a444444444444444,ebs-volume,dev,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,None,None,UNKNOWN,perf-script,NON_COMPLIANT,8,300.0,Dark Spend (Orphaned)
+s3-lendflow-dev-temp-dumps,s3-bucket,dev,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,None,None,UNKNOWN,developer,NON_COMPLIANT,7,805.0,Dark Spend (Untagged)
+rds-postgres-staging-01,rds-instance,staging,platform,Platform Core,CC-104,DB-Shared,None,None,Internal,terraform,NON_COMPLIANT,2,1411.2,Partially Allocated
+elasticache-redis-dev-01,elasticache-cluster,dev,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,None,None,UNKNOWN,console,NON_COMPLIANT,7,576.0,Dark Spend (Untagged)
+nat-gw-ap-south-1a,nat-gateway,prod,platform,Platform Core,CC-104,Networking,None,None,Internal,terraform,NON_COMPLIANT,3,2450.0,Unallocated Shared Cost
+nat-gw-ap-south-1b,nat-gateway,prod,platform,Platform Core,CC-104,Networking,None,None,Internal,terraform,NON_COMPLIANT,3,2450.0,Unallocated Shared Cost
+nat-gw-ap-south-1c,nat-gateway,prod,platform,Platform Core,CC-104,Networking,None,None,Internal,terraform,NON_COMPLIANT,3,2450.0,Unallocated Shared Cost

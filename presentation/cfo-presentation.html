@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LendFlow Technologies — CFO Review Panel Presentation</title>
+  <style>
+    :root {
+      --bg-dark: #0A1128;
+      --bg-slide: #101F42;
+      --accent-navy: #1B365D;
+      --accent-teal: #00A896;
+      --accent-green: #10B981;
+      --accent-red: #EF4444;
+      --accent-gold: #F59E0B;
+      --text-main: #F8FAFC;
+      --text-sub: #94A3B8;
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    .presentation-container {
+      width: 100%;
+      max-width: 1100px;
+      height: 640px;
+      background: var(--bg-slide);
+      border: 1px solid rgba(0, 168, 150, 0.3);
+      border-radius: 16px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide {
+      display: none;
+      flex-direction: column;
+      height: 100%;
+      padding: 48px 56px;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    .slide.active { display: flex; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .slide-header {
+      border-bottom: 2px solid rgba(255,255,255,0.08);
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .slide-title {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: -0.5px;
+    }
+
+    .slide-category {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-teal);
+      margin-bottom: 4px;
+    }
+
+    .slide-content {
+      flex: 1;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #E2E8F0;
+      overflow-y: auto;
+    }
+
+    .highlight-card {
+      background: rgba(27, 54, 93, 0.4);
+      border: 1px solid rgba(0, 168, 150, 0.25);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 16px 0;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin: 20px 0;
+    }
+
+    .stat-box {
+      background: rgba(16, 31, 66, 0.8);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 16px 20px;
+      text-align: center;
+    }
+
+    .stat-box .val { font-size: 28px; font-weight: 700; margin-bottom: 4px; }
+    .stat-box .lbl { font-size: 12px; color: var(--text-sub); text-transform: uppercase; }
+
+    ul { margin-left: 24px; margin-top: 10px; }
+    li { margin-bottom: 10px; }
+
+    .speaker-notes-box {
+      background: rgba(10, 17, 40, 0.8);
+      border-left: 4px solid var(--accent-gold);
+      padding: 10px 16px;
+      font-size: 12px;
+      font-style: italic;
+      color: #CBD5E1;
+      border-radius: 0 8px 8px 0;
+      margin-top: auto;
+    }
+
+    /* Controls */
+    .nav-bar {
+      height: 60px;
+      background: rgba(10, 17, 40, 0.9);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 32px;
+    }
+
+    .btn-nav {
+      background: var(--accent-navy);
+      color: var(--text-main);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-nav:hover { background: var(--accent-teal); color: #000; }
+    .slide-counter { font-size: 13px; color: var(--text-sub); font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <div class="presentation-container">
+    <!-- Slide 1: Title -->
+    <div class="slide active">
+      <div class="slide-header">
+        <div>
+          <div class="slide-category">Executive Board Presentation</div>
+          <div class="slide-title">LendFlow Technologies — FinOps Strategic Framework</div>
+        </div>
+        <div style="font-size: 12px; color: var(--text-sub);">September 2026</div>
+      </div>
+      <div class="slide-content">
+        <h2 style="font-size: 22px; color: var(--accent-teal); margin-bottom: 12px;">
+          Restoring Financial Operating Leverage in Cloud-Native Fintech
+        </h2>
+        <p style="font-size: 16px; margin-bottom: 24px;">
+          A comprehensive, engineering-backed plan to eliminate <strong>$64,250.00/month in cloud waste</strong> while protecting 99.95% platform availability and 100% regulatory compliance.
+        </p>
+        <div class="stats-row">
+          <div class="stat-box">
+            <div class="val" style="color: var(--accent-red);">$180,000.00</div>
+            <div class="lbl">Current Baseline Spend</div>
+          </div>
+          <div class="stat-box">
+            <div class="val" style="color: var(--accent-green);">$64,250.00</div>
+            <div class="lbl">Projected Net Monthly Savings</div>
+          </div>
+          <div class="stat-box">
+            <div class="val" style="color: var(--accent-teal);">$115,750.00</div>
+            <div class="lbl">Target Monthly Run-Rate</div>
+          </div>
+        </div>
+        <div class="speaker-notes-box">
+          <strong>Speaker Note:</strong> "Good morning Priya, Arjun, and members of the committee. Today we present our comprehensive plan to reduce cloud spend by 35.7%, exceeding your $60,000/month target within 90 days."
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2: Executive Summary -->
+    <div class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="slide-category">Executive Overview</div>
+          <div class="slide-title">Executive Summary & Strategic Targets</div>
+        </div>
+      </div>
+      <div class="slide-content">
+        <div class="highlight-card">
+          <ul style="font-size: 16px;">
+            <li><strong>Current AWS Monthly Spend:</strong> $180,000.00 / month ($2,160,000.00 annual run-rate).</li>
+            <li><strong>Mandated Target:</strong> Minimum 33.3% reduction (&gt;= $60,000.00/month savings).</li>
+            <li><strong>Projected Realised Savings:</strong> <strong>$64,250.00 / month ($771,000.00 annualised)</strong>.</li>
+            <li><strong>Target New Run-Rate:</strong> <strong>$115,750.00 / month (35.7% net reduction achieved)</strong>.</li>
+            <li><strong>Upfront Investment Payback:</strong> $18,000.00 upfront Compute Savings Plan recouped in <strong>1.23 months (40 days)</strong>.</li>
+            <li><strong>Compliance Assurance:</strong> 100% adherence to PCI DSS v4.0, SOC 2 Type II, and RBI IT Framework.</li>
+          </ul>
+        </div>
+        <div class="speaker-notes-box">
+          <strong>Speaker Note:</strong> "We audited every single resource. We found $70,850/mo in gross waste and engineered a realistic $64,250/mo net reduction. Upfront capital is paid back in just 40 days."
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3: The Business Problem -->
+    <div class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="slide-category">Business Context</div>
+          <div class="slide-title">The Problem: Super-Linear Cloud Cost Growth</div>
+        </div>
+      </div>
+      <div class="slide-content">
+        <p>Over the past 12 months, cloud infrastructure expenditure grew at <strong>2.6x the rate of revenue</strong>:</p>
+        <div class="stats-row">
+          <div class="stat-box">
+            <div class="val" style="color: var(--accent-red);">+260.0%</div>
+            <div class="lbl">AWS Spend Growth ($50k &rarr; $180k)</div>
+          </div>
+          <div class="stat-box">
+            <div class="val" style="color: var(--accent-gold);">+100.0%</div>
+            <div class="lbl">Platform Revenue Growth</div>
+          </div>
+          <div class="stat-box">
+            <div class="val" style="color: var(--accent-red);">+45.4%</div>
+            <div class="lbl">Unit Cost Degradation ($/Loan)</div>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Root Cause:</strong> Lack of tagging attribution, zero commitment coverage, 24/7 idle non-production fleets, and over-provisioned peak compute.</li>
+          <li><strong>Financial Impact:</strong> Gross margin compression and budget unpredictability (+$85,000 overrun in Month 12).</li>
+        </ul>
+        <div class="speaker-notes-box">
+          <strong>Speaker Note:</strong> "Our revenue doubled, but cloud spend grew 3.6-fold. Left unaddressed, spend would hit $250k/mo by next year."
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4: Spend Profile & Top Drivers -->
+    <div class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="slide-category">Current State</div>
+          <div class="slide-title">Current Spend Profile & Top 5 Cost Drivers</div>
+        </div>
+      </div>
+      <div class="slide-content">
+        <p>Month 12 Spend ($180,000.00 Total) is heavily concentrated:</p>
+        <div class="highlight-card">
+          <ol style="margin-left: 20px;">
+            <li><strong>EC2 Compute ($61,200 / 34.0%):</strong> 68% of fleet below 20% CPU; dev/staging running 24/7.</li>
+            <li><strong>RDS PostgreSQL ($39,600 / 22.0%):</strong> Staging Multi-AZ; idle reporting read replica.</li>
+            <li><strong>Data Transfer & NAT ($30,600 / 17.0%):</strong> Avoidable $0.045/GB NAT data processing for S3 access.</li>
+            <li><strong>S3 Object Storage ($19,800 / 11.0%):</strong> 145 TB dormant KYC loan documents in S3 Standard.</li>
+            <li><strong>ElastiCache Redis ($12,600 / 7.0%):</strong> Oversized non-prod clusters with &lt;30% memory utilization.</li>
+          </ol>
+        </div>
+        <div class="speaker-notes-box">
+          <strong>Speaker Note:</strong> "These top 5 categories represent 91% of our cloud bill and 94% of our identified savings."
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 5: Net Savings Waterfall -->
+    <div class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="slide-category">Financial Model</div>
+          <div class="slide-title">Net Savings Waterfall Analysis ($180k &rarr; $115.75k)</div>
+        </div>
+      </div>
+      <div class="slide-content">
+        <ul>
+          <li><strong>Baseline Monthly Spend:</strong> $180,000.00</li>
+          <li><strong>Compute Rightsizing & Dev Scheduling:</strong> -$19,450.00</li>
+          <li><strong>Database Optimisation & Replica Pruning:</strong> -$9,800.00</li>
+          <li><strong>Data Transfer & S3 Gateway Endpoints:</strong> -$8,800.00</li>
+          <li><strong>Storage Lifecycle & EBS GP3 Modernisation:</strong> -$7,600.00</li>
+          <li><strong>1-Year Compute Savings Plans (75% Base):</strong> -$14,600.00</li>
+          <li><strong>Spot Fleets in Batch OCR & Analytics:</strong> -$4,000.00</li>
+          <li style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 8px; margin-top: 8px; list-style: none;">
+            <strong style="color: var(--accent-green); font-size: 18px;">Target Post-Optimisation Run-Rate: $115,750.00 / month</strong>
+            <span style="color: var(--accent-teal); margin-left: 10px;">(Total Net Savings: $64,250.00 / month | $771,000.00 / year)</span>
+          </li>
+        </ul>
+        <div class="speaker-notes-box">
+          <strong>Speaker Note:</strong> "Notice our sequencing: we right-size compute first, schedule dev environments second, and only commit to Savings Plans on the clean baseline."
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 6: Commitment Strategy -->
+    <div class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="slide-category">Rate Optimisation</div>
+          <div class="slide-title">Commitment Strategy: 1-Year Compute Savings Plans</div>
+        </div>
+      </div>
+      <div class="slide-content">
+        <div class="stats-row">
+          <div class="stat-box">
+            <div class="val" style="color: var(--accent-teal);">$18,000.00</div>
+            <div class="lbl">Upfront Investment</div>
+          </div>
+          <div class="stat-box">
+            <div class="val" style="color: var(--accent-green);">$14,600.00</div>
+            <div class="lbl">Monthly Net Savings</div>
+          </div>
+          <div class="stat-box">
+            <div class="val" style="color: var(--accent-gold);">1.23 Months</div>
+            <div class="lbl">Cash Payback Period</div>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Why 1-Year over 3-Year:</strong> Avoids multi-year architectural lock-in for a 100% YoY scaling fintech.</li>
+          <li><strong>Why Compute SP over Instance SP:</strong> Automatically applies across instance families, AWS Fargate, and future <strong>AWS Graviton3</strong> migrations.</li>
+        </ul>
+        <div class="speaker-notes-box">
+          <strong>Speaker Note:</strong> "This $18,000 capital request delivers $175,200 in net annual return with full payback in 40 days."
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 7: 90-Day Implementation Roadmap -->
+    <div class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="slide-category">Execution</div>
+          <div class="slide-title">90-Day Implementation Roadmap & Milestones</div>
+        </div>
+      </div>
+      <div class="slide-content">
+        <div class="highlight-card">
+          <h4 style="color: var(--accent-teal); margin-bottom: 6px;">Phase 1: Days 0–30 (Immediate Quick Wins — $17,552/month)</h4>
+          <p style="font-size: 13px;">Delete orphan EBS volumes; terminate abandoned sandboxes; deploy S3 Gateway VPC endpoints; automated Dev/Staging scheduling; deploy Tagging SCPs.</p>
+        </div>
+        <div class="highlight-card">
+          <h4 style="color: var(--accent-teal); margin-bottom: 6px;">Phase 2: Days 31–60 (Core Optimisation — $25,900/month)</h4>
+          <p style="font-size: 13px;">Downsize compute fleet; migrate GP2 to GP3; apply S3 Glacier Instant Retrieval lifecycle; database replica consolidation.</p>
+        </div>
+        <div class="highlight-card">
+          <h4 style="color: var(--accent-teal); margin-bottom: 6px;">Phase 3: Days 61–90 (Commitments & Spot — $21,422/month)</h4>
+          <p style="font-size: 13px;">Procure 1-Year Compute Savings Plans; deploy Spot Fleets for KYC OCR; Aurora Serverless v2 for batch ETL.</p>
+        </div>
+        <div class="speaker-notes-box">
+          <strong>Speaker Note:</strong> "We generate cash savings in Month 1 that fund the commitment purchases in Month 3."
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 8: Decision Request -->
+    <div class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="slide-category">Approvals Required</div>
+          <div class="slide-title">Executive Sign-Off & Immediate Next Steps</div>
+        </div>
+      </div>
+      <div class="slide-content">
+        <h3 style="color: var(--accent-green); margin-bottom: 16px;">Formal Action Requested from CFO Priya Menon:</h3>
+        <ul>
+          <li><strong>Approval 1:</strong> Formal approval of <strong>$18,000.00 capital allocation</strong> for 1-Year Partial Upfront Compute Savings Plans (to be executed in Day 60 window).</li>
+          <li><strong>Approval 2:</strong> Adoption of the <strong>$115,750.00 monthly cloud budget cap</strong> across AWS Organizations.</li>
+          <li><strong>Approval 3:</strong> Endorsement of the FinOps Governance Model, RACI matrix, and weekly review cadences.</li>
+        </ul>
+        <p style="margin-top: 24px; font-weight: 600; color: var(--accent-teal);">
+          Next Step: Kickoff of Phase 1 Quick Wins on Monday morning.
+        </p>
+        <div class="speaker-notes-box">
+          <strong>Speaker Note:</strong> "Thank you Priya and Arjun. We now invite your questions and request your formal approval."
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="nav-bar">
+      <button class="btn-nav" id="prevBtn" onclick="prevSlide()">&larr; Previous</button>
+      <div class="slide-counter" id="slideCounter">Slide 1 of 8</div>
+      <button class="btn-nav" id="nextBtn" onclick="nextSlide()">Next &rarr;</button>
+    </div>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const counter = document.getElementById('slideCounter');
+
+    function showSlide(idx) {
+      slides.forEach((s, i) => {
+        s.classList.toggle('active', i === idx);
+      });
+      counter.textContent = `Slide ${idx + 1} of ${slides.length}`;
+    }
+
+    function nextSlide() {
+      if (currentSlide < slides.length - 1) {
+        currentSlide++;
+        showSlide(currentSlide);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        showSlide(currentSlide);
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+  </script>
+
+</body>
+</html>
