@@ -110,7 +110,6 @@ pie title
 
 ## Compliance Guardrails & Governance Safeguards
 
-Every single optimisation measure has undergone formal Compliance Impact Assessment:
 * **PCI DSS v4.0:** Payment Gateway microservices retain dedicated Multi-AZ compute in isolated VPC subnets; **100% excluded from Spot instances**.
 * **SOC 2 Type II:** All audit, access, and transaction logs are transitioned to compliant Glacier storage with **S3 Object Lock (Compliance WORM)** enabled; zero deletion of compliance records.
 * **RBI IT Framework:** Core banking and lending databases strictly maintain synchronous Multi-AZ primary/standby replication within Mumbai (`ap-south-1`).
