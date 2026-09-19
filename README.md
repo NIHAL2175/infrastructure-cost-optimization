@@ -1,29 +1,16 @@
-# LendFlow Technologies — Infrastructure Cost Optimisation & FinOps Framework
+# Infrastructure Cost Optimisation
 
-[![FinOps Foundation](https://img.shields.io/badge/FinOps-Inform%20|%20Optimise%20|%20Operate-blue.svg)](https://finops.org)
-[![AWS Well-Architected](https://img.shields.io/badge/AWS-Well--Architected%20Cost%20Pillar-orange.svg)](https://aws.amazon.com/architecture/well-architected/)
-[![Compliance](https://img.shields.io/badge/Compliance-PCI%20DSS%20|%20SOC%202%20|%20RBI%20IT%20|%20GDPR-green.svg)](#compliance-guardrails)
-[![Release](https://img.shields.io/badge/Release-v1.0.0%20(Production%20Ready)-brightgreen.svg)](CHANGELOG.md)
-
-> **Enterprise FinOps implementation reducing AWS cloud infrastructure expenditure from $180,000.00/month to $115,750.00/month (achieving $64,250.00/month net savings, 35.7% reduction) for a cloud-native fintech platform processing 500,000+ monthly loan applications.**
+> **Author** : Nihal N  
+> **Track** : DevOps & Cloud Engineer  
+> **Category** : Cost Optimisation  
 
 ---
 
 ## Executive Summary
 
-**LendFlow Technologies** is a fictional high-growth cloud-native fintech enterprise operating 12 mission-critical microservices on AWS (primarily in `ap-south-1` Mumbai). Over the past 12 months, AWS monthly spend spiralled from **$50,000/month to $180,000/month** (+260.0%), significantly outpacing revenue growth (+100.0%). Crucially, the unit cost per loan application degraded by **+45.4%** (rising from $0.238 to $0.346), indicating severe diseconomies of scale caused by over-provisioning, unmanaged dev environments, and zero commitment coverage.
-
-Under executive directive from CFO Priya Menon and CTO Arjun Deshmukh, this repository delivers an end-to-end FinOps Framework and technical cost remediation architecture.
-
-### Master Financial Reconciliation & Baseline Metrics
-* **Current Monthly Spend Baseline:** **$180,000.00 / month** ($2,160,000.00 annual run-rate)
-* **Primary Business Objective (CFO):** Minimum 33.3% cost reduction ($\ge$ **$60,000.00 / month** net savings)
-* **Projected Realised Monthly Savings:** **$64,250.00 / month** (**35.7% net reduction**, surpassing the target)
-* **Projected Realised Annual Savings:** **$771,000.00 / year**
-* **Target Post-Optimisation Monthly Run-Rate:** **$115,750.00 / month** ($1,389,000.00 annual run-rate)
-* **Payback Period on Upfront Commitments:** **1.23 Months (40 days)** on $18,000.00 Compute Savings Plan
-* **Fintech Unit Economic Improvement:** Cost per loan application drops from **$0.346 to $0.223 (-35.5% unit reduction)**
-* **Regulatory Compliance Posture:** 100% adherence to **PCI DSS v4.0, SOC 2 Type II, RBI IT Framework, GDPR, and Indian Data Localisation** mandates with zero audit findings.
+- LendFlow Technologies is a fictional cloud-native fintech enterprise running 12 mission-critical microservices on AWS, primarily in ap-south-1 (Mumbai).
+- AWS monthly costs increased from $50K to $180K (+260%), while cost per loan application rose 45.4% ($0.238 → $0.346), driven by over-provisioning, unmanaged environments, and zero commitment coverage.
+- This project implements an end-to-end FinOps Framework and technical cost-remediation architecture under the direction of CFO Priya Menon and CTO Arjun Deshmukh, focused on improving AWS cost efficiency and scalability.
 
 ---
 
@@ -103,7 +90,7 @@ Under executive directive from CFO Priya Menon and CTO Arjun Deshmukh, this repo
 ## Primary Cost Reduction Drivers ($64,250.00 / Month Total)
 
 ```mermaid
-pie title Monthly Net Savings by Category ($64,250 Total)
+pie title 
     "Compute Rightsizing & Dev Scheduling" : 19450
     "Commitment Strategy (1-Yr CSP)" : 14600
     "Database & Caching Optimisation" : 9800
@@ -121,30 +108,6 @@ pie title Monthly Net Savings by Category ($64,250 Total)
 
 ---
 
-## 90-Day Savings Realisation Roadmap
-
-```mermaid
-gantt
-    title 90-Day FinOps Savings Realisation Roadmap
-    dateFormat  YYYY-MM-DD
-    section Phase 1: Days 0–30 ($17,552/mo)
-    Delete Orphan EBS & Terminate Sandboxes ($1,792/mo)  :done, p1_1, 2026-10-01, 2026-10-07
-    Deploy AWS S3 Gateway VPC Endpoints ($7,560/mo)      :done, p1_2, 2026-10-05, 2026-10-12
-    Implement Dev/Staging Auto-Scheduling ($8,200/mo)    :done, p1_3, 2026-10-10, 2026-10-25
-    Deploy Tagging SCPs & Config Conformance Pack        :done, p1_4, 2026-10-20, 2026-10-30
-    section Phase 2: Days 31–60 ($25,900/mo)
-    Right-Size Compute Fleet Instances ($11,250/mo)      :active, p2_1, 2026-11-01, 2026-11-20
-    Database Downsizing & Replica Consolidation ($9,800/mo) :active, p2_2, 2026-11-10, 2026-11-25
-    Migrate EBS GP2 to GP3 Online ($650/mo)              :active, p2_3, 2026-11-15, 2026-11-25
-    S3 KYC Lifecycle to Glacier Instant ($1,850/mo)      :active, p2_4, 2026-11-20, 2026-11-30
-    section Phase 3: Days 61–90 ($21,422/mo)
-    Procure 1-Year Compute Savings Plans ($14,600/mo)    :p3_1, 2026-12-01, 2026-12-10
-    Deploy Spot Fleets for KYC OCR & Batch ($4,000/mo)   :p3_2, 2026-12-05, 2026-12-20
-    Migrate Batch ETL to Aurora Serverless v2 ($1,705/mo):p3_3, 2026-12-15, 2026-12-31
-```
-
----
-
 ## Compliance Guardrails & Governance Safeguards
 
 Every single optimisation measure has undergone formal Compliance Impact Assessment:
@@ -152,41 +115,6 @@ Every single optimisation measure has undergone formal Compliance Impact Assessm
 * **SOC 2 Type II:** All audit, access, and transaction logs are transitioned to compliant Glacier storage with **S3 Object Lock (Compliance WORM)** enabled; zero deletion of compliance records.
 * **RBI IT Framework:** Core banking and lending databases strictly maintain synchronous Multi-AZ primary/standby replication within Mumbai (`ap-south-1`).
 * **GDPR & Data Localisation:** Cross-border data transfers are strictly restricted. Customer Personal Identifiable Information (PII) remains within Indian geographic boundaries.
-
----
-
-## How to Reproduce Analysis & Validate Outputs
-
-All data and workbooks in this repository can be programmatically reproduced from scratch using standard Python 3.10+ and Node.js:
-
-1. **Prerequisites:**
-   ```bash
-   pip install openpyxl
-   ```
-2. **Generate All 8 Mathematical Datasets:**
-   ```bash
-   python scripts/generate_datasets.py
-   ```
-3. **Build the Billing Analysis Workbook:**
-   ```bash
-   python scripts/build_billing_analysis.py
-   ```
-4. **Build the Master Financial Savings Model Workbook:**
-   ```bash
-   python scripts/build_savings_model.py
-   python scripts/append_storage_datatransfer.py
-   python scripts/append_commitment_spot.py
-   ```
-5. **Run the Programmatic Quality Assurance & Cross-Reference Test:**
-   ```bash
-   python scripts/verify_cross_references.py
-   ```
-
----
-
-## AI-Assisted Methodology Disclosure
-
-In accordance with ethical AI engineering standards, artificial intelligence was utilized as an assistive co-pilot for productivity, analytical acceleration, and code synthesis. All architectural decisions, mathematical formulas, telemetry correlations, compliance assessments, and financial risk models were specifically tailored to the LendFlow Technologies fintech scenario, critically vetted, and mathematically validated against industry standards.
 ---
 <div align="center">
 
